@@ -739,7 +739,7 @@
   const state=JSON.parse(localStorage.getItem('hm-training')||'{}');
   function save() { localStorage.setItem('hm-training',JSON.stringify(state)); }
 
-  // CHECKLIST
+  // CHECKLIST (no longer affects overall progress)
   const preGrid=document.getElementById('pre-checklist');
   preItems.forEach((label,i)=>{
     const key='pre-'+i, el=document.createElement('div');
@@ -749,7 +749,8 @@
       state[key]=!state[key];
       el.classList.toggle('done',state[key]);
       el.querySelector('.box').innerHTML=state[key]?'&#10003;':'';
-      save(); updateOverall();
+      save();
+      // Note: updateOverall() intentionally NOT called here
     });
     preGrid.appendChild(el);
   });
@@ -793,11 +794,10 @@
     weeksGrid.appendChild(card);
   });
 
-  // OVERALL PROGRESS
+  // OVERALL PROGRESS — workouts only, checklist excluded
   function updateOverall(){
-    const total=weeks.reduce((s,w)=>s+w.days.length,0)+preItems.length;
-    const done=weeks.reduce((s,w)=>s+w.days.filter((_,di)=>state[`w${w.week}-d${di}`]).length,0)
-               +preItems.filter((_,i)=>state['pre-'+i]).length;
+    const total=weeks.reduce((s,w)=>s+w.days.length,0);
+    const done=weeks.reduce((s,w)=>s+w.days.filter((_,di)=>state[`w${w.week}-d${di}`]).length,0);
     const pct=Math.round((done/total)*100);
     document.getElementById('overall-fill').style.width=pct+'%';
     document.getElementById('overall-pct').textContent=pct+'%';
