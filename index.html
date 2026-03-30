@@ -64,7 +64,6 @@
       --check-bg:       rgba(0,0,0,0.03);
       --week-header-bg: rgba(0,0,0,0.03);
       --week-header-border: rgba(0,0,0,0.06);
-      /* Light mode pills: solid opaque backgrounds, dark readable text */
       --pill-yoga-bg:   #ede9fe;  --pill-yoga-color:   #5b21b6; --pill-yoga-border:   #c4b5fd;
       --pill-tempo-bg:  #fef9c3;  --pill-tempo-color:  #92400e; --pill-tempo-border:  #fde68a;
       --pill-xtrain-bg: #dbeafe;  --pill-xtrain-color: #1e40af; --pill-xtrain-border: #93c5fd;
@@ -78,7 +77,6 @@
       --phase-taper-bg: #dcfce7;  --phase-taper-color: #166534;  --phase-taper-border: #86efac;
     }
 
-    /* ── BODY & ANIMATED GRADIENT BG ── */
     body {
       font-family: var(--font);
       min-height: 100vh;
@@ -225,7 +223,6 @@
     }
     header p { color: var(--muted); font-size: 1.05rem; max-width: 560px; margin: 0 auto 32px; }
 
-    /* COUNTDOWN */
     .countdown-wrap {
       background: var(--glass-bg);
       backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
@@ -264,7 +261,6 @@
     .stat strong { display: block; font-size: 1.9rem; font-weight: 900; color: var(--primary); }
     .stat span { font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
 
-    /* ── MAIN ── */
     main { max-width: 1100px; margin: 52px auto; padding: 0 22px; }
 
     .section-title {
@@ -320,7 +316,6 @@
     }
     .week-header h3 { font-size: 0.95rem; font-weight: 700; color: var(--text); }
 
-    /* Phase pills — use CSS vars so light/dark both look great */
     .week-header .phase {
       font-size: 0.68rem; padding: 3px 11px; border-radius: 999px;
       font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
@@ -349,7 +344,6 @@
     .day-label { font-size: 0.82rem; line-height: 1.45; color: var(--text); }
     .day-name { font-weight: 700; color: var(--primary); font-size: 0.75rem; display: block; }
 
-    /* Workout type pill tags — use CSS vars */
     .day-type {
       display: inline-block; font-size: 0.63rem; font-weight: 700;
       text-transform: uppercase; letter-spacing: 0.4px;
@@ -526,7 +520,7 @@
     <span id="overall-pct">0%</span>
   </div>
 
-  <!-- 1. RUNNER'S TIPS (moved to top) -->
+  <!-- 1. RUNNER'S TIPS -->
   <h2 class="section-title" id="tips">Runner's Tips</h2>
   <div class="tips-grid">
     <div class="tip-card"><div class="tip-icon">Hydration</div><h4>Stay Hydrated</h4><p>Drink 16-20 oz of water 2 hrs before every run. Carry water or use a belt on runs over 6 miles.</p></div>
@@ -541,7 +535,7 @@
   <h2 class="section-title" id="schedule">8-Week Training Schedule</h2>
   <div class="weeks-grid" id="weeks-grid"></div>
 
-  <!-- 3. PRE-RUN CHECKLIST (moved to bottom) -->
+  <!-- 3. PRE-RUN CHECKLIST -->
   <h2 class="section-title" id="checklist">Pre-Run Checklist</h2>
   <div class="checklist-grid" id="pre-checklist"></div>
 
@@ -630,7 +624,7 @@
     if(isNaN(raceDate.getTime())) { msg.textContent='Pick your race date above'; return; }
     if(diff<=0) {
       ['cd-days','cd-hours','cd-mins','cd-secs'].forEach(id=>document.getElementById(id).textContent='00');
-      msg.textContent=diff>-86400000?'Race Day! Go crush it!':'Race complete — great job!';
+      msg.textContent=diff>-86400000?'Race Day! Go crush it!':'Race complete \u2014 great job!';
       return;
     }
     const d=Math.floor(diff/86400000),h=Math.floor((diff%86400000)/3600000),
@@ -639,7 +633,7 @@
     document.getElementById('cd-hours').textContent=String(h).padStart(2,'0');
     document.getElementById('cd-mins').textContent=String(m).padStart(2,'0');
     document.getElementById('cd-secs').textContent=String(s).padStart(2,'0');
-    msg.textContent=d+' day'+(d!==1?'s':'')+' until race day — stay the course!';
+    msg.textContent=d+' day'+(d!==1?'s':'')+' until race day \u2014 stay the course!';
   }
 
   // ── TRAINING DATA ──
@@ -656,88 +650,88 @@
   const T={
     yoga:    '<span class="day-type type-yoga">Yoga</span>',
     tempo:   '<span class="day-type type-tempo">Tempo</span>',
-    fartlek: '<span class="day-type type-tempo">Fartlek</span>',
-    thresh:  '<span class="day-type type-tempo">Threshold</span>',
+    easy:    '<span class="day-type type-tempo">Easy Run</span>',
     xtrain:  '<span class="day-type type-xtrain">Cross-Train</span>',
     track:   '<span class="day-type type-track">Track</span>',
     rest:    '<span class="day-type type-rest">Rest</span>',
     long:    '<span class="day-type type-long">Long Run</span>',
     recover: '<span class="day-type type-recover">Recovery</span>',
+    shakeout:'<span class="day-type type-recover">Shakeout</span>',
     race:    '<span class="day-type type-long">Race Day</span>',
   };
 
   const weeks=[
     {week:1,theme:'Find Your Groove',days:[
-      {day:'Mon',tag:T.yoga,   run:'Yoga — 60 min (hip flexors, hamstrings, calves)'},
+      {day:'Mon',tag:T.yoga,   run:'Yoga \u2014 60 min (hip flexors, hamstrings, calves)'},
       {day:'Tue',tag:T.track,  run:'5-6 miles at track'},
-      {day:'Wed',tag:T.xtrain, run:'Cross-train — Bike 30-40 min (moderate effort)'},
+      {day:'Wed',tag:T.xtrain, run:'Cross-train \u2014 Bike 30-40 min (moderate effort)'},
       {day:'Thu',tag:T.track,  run:'5-6 miles at track'},
-      {day:'Fri',tag:T.rest,   run:'Rest — light stretching or foam roll'},
-      {day:'Sat',tag:T.long,   run:'Long run — 7 miles (easy, conversational pace)'},
-      {day:'Sun',tag:T.recover,run:'Optional recovery run — 3 miles easy'}
+      {day:'Fri',tag:T.rest,   run:'Rest \u2014 light stretching or foam roll'},
+      {day:'Sat',tag:T.long,   run:'Long run \u2014 7 miles (easy, conversational pace)'},
+      {day:'Sun',tag:T.recover,run:'Optional recovery run \u2014 3 miles easy'}
     ]},
     {week:2,theme:'Build Consistency',days:[
-      {day:'Mon',tag:T.yoga,   run:'Yoga — 60 min (focus: hip openers + back)'},
+      {day:'Mon',tag:T.yoga,   run:'Yoga \u2014 60 min (focus: hip openers + back)'},
       {day:'Tue',tag:T.track,  run:'5-6 miles at track'},
-      {day:'Wed',tag:T.xtrain, run:'Cross-train — Bike 35-40 min'},
+      {day:'Wed',tag:T.xtrain, run:'Cross-train \u2014 Bike 35-40 min'},
       {day:'Thu',tag:T.track,  run:'5-6 miles at track'},
       {day:'Fri',tag:T.rest,   run:'Rest'},
-      {day:'Sat',tag:T.long,   run:'Long run — 8 miles (easy pace)'},
-      {day:'Sun',tag:T.recover,run:'Optional recovery run — 3 miles easy'}
+      {day:'Sat',tag:T.long,   run:'Long run \u2014 8 miles (easy pace)'},
+      {day:'Sun',tag:T.recover,run:'Optional recovery run \u2014 3 miles easy'}
     ]},
     {week:3,theme:'Increase the Load',days:[
-      {day:'Mon',tag:T.yoga,   run:'Yoga — 60 min (focus: quads + IT band)'},
+      {day:'Mon',tag:T.yoga,   run:'Yoga \u2014 60 min (focus: quads + IT band)'},
       {day:'Tue',tag:T.track,  run:'5-6 miles at track'},
-      {day:'Wed',tag:T.xtrain, run:'Cross-train — Bike 40 min (add 1-2 hill segments)'},
+      {day:'Wed',tag:T.xtrain, run:'Cross-train \u2014 Bike 40 min (add 1-2 hill segments)'},
       {day:'Thu',tag:T.track,  run:'5-6 miles at track'},
       {day:'Fri',tag:T.rest,   run:'Rest'},
-      {day:'Sat',tag:T.long,   run:'Long run — 9 miles (easy, stay conversational)'},
-      {day:'Sun',tag:T.recover,run:'Optional recovery run — 3 miles easy'}
+      {day:'Sat',tag:T.long,   run:'Long run \u2014 9 miles (easy, stay conversational)'},
+      {day:'Sun',tag:T.recover,run:'Optional recovery run \u2014 3 miles easy'}
     ]},
     {week:4,theme:'Speed & Strength',days:[
-      {day:'Mon',tag:T.yoga,   run:'Yoga — 60 min (full body flow)'},
+      {day:'Mon',tag:T.yoga,   run:'Yoga \u2014 60 min (full body flow)'},
       {day:'Tue',tag:T.track,  run:'5-6 miles at track'},
-      {day:'Wed',tag:T.xtrain, run:'Cross-train — Bike 40 min (steady effort)'},
+      {day:'Wed',tag:T.xtrain, run:'Cross-train \u2014 Bike 40 min (steady effort)'},
       {day:'Thu',tag:T.track,  run:'5-6 miles at track'},
       {day:'Fri',tag:T.rest,   run:'Rest'},
-      {day:'Sat',tag:T.long,   run:'Long run — 10 miles (easy pace, bring fuel)'},
-      {day:'Sun',tag:T.recover,run:'Optional recovery run — 3 miles easy'}
+      {day:'Sat',tag:T.long,   run:'Long run \u2014 10 miles (easy pace, bring fuel)'},
+      {day:'Sun',tag:T.recover,run:'Optional recovery run \u2014 3 miles easy'}
     ]},
     {week:5,theme:'Peak Week Begins',days:[
-      {day:'Mon',tag:T.yoga,   run:'Yoga — 60 min (restorative + deep stretch)'},
+      {day:'Mon',tag:T.yoga,   run:'Yoga \u2014 60 min (restorative + deep stretch)'},
       {day:'Tue',tag:T.track,  run:'5-6 miles at track'},
-      {day:'Wed',tag:T.xtrain, run:'Cross-train — Bike 45 min'},
+      {day:'Wed',tag:T.xtrain, run:'Cross-train \u2014 Bike 45 min'},
       {day:'Thu',tag:T.track,  run:'5-6 miles at track'},
       {day:'Fri',tag:T.rest,   run:'Rest'},
-      {day:'Sat',tag:T.long,   run:'Long run — 11 miles (easy, fuel at mile 5-6)'},
-      {day:'Sun',tag:T.recover,run:'Optional recovery run — 3 miles easy'}
+      {day:'Sat',tag:T.long,   run:'Long run \u2014 11 miles (easy, fuel at mile 5-6)'},
+      {day:'Sun',tag:T.recover,run:'Optional recovery run \u2014 3 miles easy'}
     ]},
     {week:6,theme:'Race Simulation',days:[
-      {day:'Mon',tag:T.yoga,   run:'Yoga — 60 min (focus: glutes + lower back)'},
+      {day:'Mon',tag:T.yoga,   run:'Yoga \u2014 60 min (focus: glutes + lower back)'},
       {day:'Tue',tag:T.track,  run:'5-6 miles at track'},
-      {day:'Wed',tag:T.xtrain, run:'Cross-train — Bike 40 min (easy — legs recovery)'},
+      {day:'Wed',tag:T.xtrain, run:'Cross-train \u2014 Bike 40 min (easy \u2014 legs recovery)'},
       {day:'Thu',tag:T.track,  run:'5-6 miles at track'},
-      {day:'Fri',tag:T.rest,   run:'Rest — prioritize sleep tonight'},
-      {day:'Sat',tag:T.long,   run:'Long run — 9 miles (easy, conversational pace)'},
-      {day:'Sun',tag:T.recover,run:'Optional recovery run — 3 miles very easy'}
+      {day:'Fri',tag:T.rest,   run:'Rest \u2014 prioritize sleep tonight'},
+      {day:'Sat',tag:T.long,   run:'Long run \u2014 9 miles (easy, conversational pace)'},
+      {day:'Sun',tag:T.recover,run:'Optional recovery run \u2014 3 miles very easy'}
     ]},
     {week:7,theme:'Begin Taper',days:[
-      {day:'Mon',tag:T.yoga,   run:'Yoga — 45 min (gentle, restorative)'},
+      {day:'Mon',tag:T.yoga,   run:'Yoga \u2014 45 min (gentle, restorative)'},
       {day:'Tue',tag:T.track,  run:'5-6 miles at track'},
-      {day:'Wed',tag:T.xtrain, run:'Cross-train — Bike 30 min (easy spin, active recovery)'},
+      {day:'Wed',tag:T.xtrain, run:'Cross-train \u2014 Bike 30 min (easy spin, active recovery)'},
       {day:'Thu',tag:T.track,  run:'5-6 miles at track'},
       {day:'Fri',tag:T.rest,   run:'Rest'},
-      {day:'Sat',tag:T.long,   run:'Long run — 7 miles (easy, no pressure)'},
-      {day:'Sun',tag:T.recover,run:'Optional recovery run — 3 miles easy'}
+      {day:'Sat',tag:T.long,   run:'Long run \u2014 7 miles (easy, no pressure)'},
+      {day:'Sun',tag:T.recover,run:'Optional recovery run \u2014 3 miles easy'}
     ]},
     {week:8,theme:'Race Week',days:[
-      {day:'Mon',tag:T.yoga,   run:'Yoga — 30 min (light, no deep stretching)'},
-      {day:'Tue',tag:T.tempo,  run:'Easy run — 3 miles with 4x20-sec strides at end'},
-      {day:'Wed',tag:T.xtrain, run:'Cross-train — Bike 20 min (very easy spin only)'},
-      {day:'Thu',tag:T.track,  run:'Shakeout — 2 miles easy + 4x100m strides'},
-      {day:'Fri',tag:T.rest,   run:'Rest — prep gear, lay out race kit, hydrate'},
-      {day:'Sat',tag:T.rest,   run:'Rest — light walk, early dinner, early to bed'},
-      {day:'Sun',tag:T.race,   run:'RACE DAY — 13.1 miles. Trust your training!'}
+      {day:'Mon',tag:T.yoga,     run:'Yoga \u2014 30 min (light, no deep stretching)'},
+      {day:'Tue',tag:T.easy,     run:'Easy run \u2014 5 miles (comfortable, relaxed pace)'},
+      {day:'Wed',tag:T.rest,     run:'Rest \u2014 legs up, hydrate, stay off your feet'},
+      {day:'Thu',tag:T.easy,     run:'Easy run \u2014 4 miles (shakeout effort, keep it light)'},
+      {day:'Fri',tag:T.rest,     run:'Rest \u2014 traveling to race location, stay hydrated'},
+      {day:'Sat',tag:T.shakeout, run:'Shakeout run \u2014 2-3 miles easy + light strides, race prep'},
+      {day:'Sun',tag:T.race,     run:'RACE DAY \u2014 13.1 miles. Trust your training!'}
     ]}
   ];
 
@@ -776,7 +770,7 @@
     const pct=Math.round((filled/w.days.length)*100);
     card.innerHTML=`
       <div class="week-header">
-        <h3>Week ${w.week} — ${w.theme}</h3>
+        <h3>Week ${w.week} \u2014 ${w.theme}</h3>
         <span class="phase ${pClass}">${phase}</span>
       </div>
       <div class="week-body">${daysHTML}
