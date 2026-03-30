@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,7 +7,7 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    :root {
+    :root, [data-theme="dark"] {
       --primary:   #f97316;
       --primary2:  #fb923c;
       --check:     #4ade80;
@@ -23,6 +23,23 @@
       --text:      #f1f5f9;
       --muted:     #94a3b8;
       --transition: all 0.3s ease;
+      --body-bg:   #0d0d1a;
+      --topbar-bg: rgba(255,255,255,0.05);
+      --topbar-border: rgba(255,255,255,0.1);
+      --orb-opacity: 0.55;
+    }
+
+    [data-theme="light"] {
+      --glass-bg:       rgba(255,255,255,0.75);
+      --glass-bg-card:  rgba(255,255,255,0.60);
+      --glass-border:   rgba(0,0,0,0.10);
+      --glass-shadow:   0 8px 32px rgba(0,0,0,0.12);
+      --text:      #1e293b;
+      --muted:     #64748b;
+      --body-bg:   #f0f4ff;
+      --topbar-bg: rgba(255,255,255,0.80);
+      --topbar-border: rgba(0,0,0,0.08);
+      --orb-opacity: 0.18;
     }
 
     /* ── BODY & ANIMATED GRADIENT BG ── */
@@ -30,9 +47,10 @@
       font-family: var(--font);
       min-height: 100vh;
       color: var(--text);
-      background: #0d0d1a;
+      background: var(--body-bg);
       overflow-x: hidden;
       position: relative;
+      transition: background 0.35s, color 0.35s;
     }
 
     /* Gradient canvas behind everything */
@@ -43,19 +61,22 @@
                   radial-gradient(ellipse at 10% 80%, #172554 0%, transparent 50%),
                   #0d0d1a;
       pointer-events: none;
+      transition: opacity 0.35s;
     }
+    [data-theme="light"] .bg-canvas { opacity: 0.25; }
 
     /* Floating color orbs (glassmorphism signature) */
     .orb {
       position: fixed; border-radius: 50%;
-      filter: blur(80px); opacity: 0.55;
+      filter: blur(80px); opacity: var(--orb-opacity);
       pointer-events: none; z-index: 0;
       animation: drift 18s ease-in-out infinite alternate;
+      transition: opacity 0.35s;
     }
     .orb-1 { width: 500px; height: 500px; background: #f97316; top: -120px; left: -100px; animation-duration: 20s; }
     .orb-2 { width: 400px; height: 400px; background: #7c3aed; top: 30%; right: -80px; animation-duration: 25s; animation-delay: -5s; }
     .orb-3 { width: 350px; height: 350px; background: #0ea5e9; bottom: -100px; left: 30%; animation-duration: 22s; animation-delay: -10s; }
-    .orb-4 { width: 280px; height: 280px; background: #10b981; bottom: 20%; right: 20%; animation-duration: 28s; animation-delay: -8s; opacity: 0.35; }
+    .orb-4 { width: 280px; height: 280px; background: #10b981; bottom: 20%; right: 20%; animation-duration: 28s; animation-delay: -8s; }
 
     @keyframes drift {
       0%   { transform: translate(0,0) scale(1); }
@@ -137,27 +158,31 @@
     /* ── TOPBAR ── */
     .topbar {
       position: sticky; top: 0; z-index: 100;
-      background: rgba(255,255,255,0.05);
+      background: var(--topbar-bg);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      border-bottom: 1px solid rgba(255,255,255,0.1);
+      border-bottom: 1px solid var(--topbar-border);
       padding: 14px 28px;
       display: flex; align-items: center; justify-content: space-between;
+      transition: background 0.35s, border-color 0.35s;
     }
     .topbar .logo {
       font-weight: 800; font-size: 1rem; color: var(--text); letter-spacing: 0.3px;
     }
     .topbar .logo span { color: var(--primary); }
+
+    /* ── THEME TOGGLE BUTTON ── */
     .theme-toggle {
       display: flex; align-items: center; gap: 8px; cursor: pointer;
-      background: rgba(255,255,255,0.07);
-      border: 1px solid rgba(255,255,255,0.14);
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
       border-radius: 999px; padding: 7px 16px;
       font-size: 0.82rem; font-weight: 600; color: var(--text);
       transition: var(--transition); user-select: none;
       backdrop-filter: blur(8px);
     }
     .theme-toggle:hover { border-color: var(--primary); background: rgba(249,115,22,0.12); }
+    .theme-toggle svg { flex-shrink: 0; }
 
     /* ── HERO ── */
     header {
@@ -178,6 +203,10 @@
       background: linear-gradient(135deg, #fff 30%, var(--primary) 70%, #a78bfa 100%);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
       background-clip: text;
+    }
+    [data-theme="light"] header h1 {
+      background: linear-gradient(135deg, #1e293b 20%, var(--primary) 60%, #7c3aed 100%);
+      -webkit-background-clip: text; background-clip: text;
     }
     header p { color: var(--muted); font-size: 1.05rem; max-width: 560px; margin: 0 auto 32px; }
 
@@ -428,6 +457,13 @@
   <div class="logo">Thalia's <span>Training Plan</span></div>
   <div style="display:flex;gap:10px;align-items:center;">
     <span style="font-size:0.75rem;color:var(--muted);">8 Weeks &bull; 13.1 mi</span>
+    <button class="theme-toggle" id="theme-toggle" aria-label="Switch to light mode">
+      <!-- Moon icon (shown in dark mode) -->
+      <svg id="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <!-- Sun icon (shown in light mode) -->
+      <svg id="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none;"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+      <span id="theme-label">Dark</span>
+    </button>
   </div>
 </nav>
 
@@ -483,7 +519,7 @@
     <div class="tip-card"><div class="tip-icon">Fuel</div><h4>Fuel &amp; Nutrition</h4><p>Light carb snack 45-60 min before runs. Use energy gels on long runs over 60 minutes.</p></div>
     <div class="tip-card"><div class="tip-icon">Recovery</div><h4>Sleep &amp; Recovery</h4><p>Aim for 7-9 hrs of sleep. Sunday recovery runs should be truly easy &mdash; no ego pace.</p></div>
     <div class="tip-card"><div class="tip-icon">Yoga</div><h4>Monday Yoga</h4><p>Monday yoga is your reset. Focus on hip flexors, hamstrings, and calves &mdash; the runner's trifecta.</p></div>
-    <div class="tip-card"><div class="tip-icon">Track</div><h4>Thursday Track</h4><p>Track days build speed and form. Warm up 1 mile easy before any interval or threshold effort.</p></div>
+    <div class="tip-card"><div class="tip-icon">Track</div><h4>Track Days</h4><p>Track days build speed and form. Warm up before hitting your workout intervals or threshold efforts.</p></div>
     <div class="tip-card"><div class="tip-icon">Long Run</div><h4>Saturday Long Run</h4><p>Run Saturdays at a conversational pace &mdash; 60-90 sec/mile slower than your goal race pace.</p></div>
   </div>
 </main>
@@ -502,6 +538,35 @@
 </nav>
 
 <script>
+  // ── THEME TOGGLE ──
+  (function(){
+    const html = document.documentElement;
+    const btn = document.getElementById('theme-toggle');
+    const moon = document.getElementById('icon-moon');
+    const sun = document.getElementById('icon-sun');
+    const label = document.getElementById('theme-label');
+    let theme = 'dark';
+
+    function applyTheme(t) {
+      theme = t;
+      html.setAttribute('data-theme', t);
+      if (t === 'light') {
+        moon.style.display = 'none';
+        sun.style.display = 'block';
+        label.textContent = 'Light';
+        btn.setAttribute('aria-label', 'Switch to dark mode');
+      } else {
+        moon.style.display = 'block';
+        sun.style.display = 'none';
+        label.textContent = 'Dark';
+        btn.setAttribute('aria-label', 'Switch to light mode');
+      }
+    }
+
+    btn.addEventListener('click', () => applyTheme(theme === 'dark' ? 'light' : 'dark'));
+    applyTheme('dark');
+  })();
+
   // PASSWORD GATE
   const CORRECT_PIN = '0719';
   let currentPin = '';
@@ -581,65 +646,65 @@
   const weeks=[
     {week:1,theme:'Find Your Groove',days:[
       {day:'Mon',tag:T.yoga,   run:'Yoga — 60 min (hip flexors, hamstrings, calves)'},
-      {day:'Tue',tag:T.tempo,  run:'Tempo run — 5 miles at comfortably hard pace'},
+      {day:'Tue',tag:T.track,  run:'5-6 miles at track'},
       {day:'Wed',tag:T.xtrain, run:'Cross-train — Bike 30-40 min (moderate effort)'},
-      {day:'Thu',tag:T.track,  run:'Track — 5 miles (easy + 4x800m strides)'},
+      {day:'Thu',tag:T.track,  run:'5-6 miles at track'},
       {day:'Fri',tag:T.rest,   run:'Rest — light stretching or foam roll'},
       {day:'Sat',tag:T.long,   run:'Long run — 7 miles (easy, conversational pace)'},
       {day:'Sun',tag:T.recover,run:'Optional recovery run — 3 miles easy'}
     ]},
     {week:2,theme:'Build Consistency',days:[
       {day:'Mon',tag:T.yoga,   run:'Yoga — 60 min (focus: hip openers + back)'},
-      {day:'Tue',tag:T.fartlek,run:'Fartlek run — 5 miles (1 min fast / 2 min easy x8)'},
+      {day:'Tue',tag:T.track,  run:'5-6 miles at track'},
       {day:'Wed',tag:T.xtrain, run:'Cross-train — Bike 35-40 min'},
-      {day:'Thu',tag:T.track,  run:'Track — 5 miles (2 mi warm-up + 6x400m + cool-down)'},
+      {day:'Thu',tag:T.track,  run:'5-6 miles at track'},
       {day:'Fri',tag:T.rest,   run:'Rest'},
       {day:'Sat',tag:T.long,   run:'Long run — 8 miles (easy pace)'},
       {day:'Sun',tag:T.recover,run:'Optional recovery run — 3 miles easy'}
     ]},
     {week:3,theme:'Increase the Load',days:[
       {day:'Mon',tag:T.yoga,   run:'Yoga — 60 min (focus: quads + IT band)'},
-      {day:'Tue',tag:T.thresh, run:'Threshold run — 6 miles (2 mi easy + 3 mi threshold + 1 mi cool)'},
+      {day:'Tue',tag:T.track,  run:'5-6 miles at track'},
       {day:'Wed',tag:T.xtrain, run:'Cross-train — Bike 40 min (add 1-2 hill segments)'},
-      {day:'Thu',tag:T.track,  run:'Track — 6 miles (1 mi warm-up + 8x400m + cool-down)'},
+      {day:'Thu',tag:T.track,  run:'5-6 miles at track'},
       {day:'Fri',tag:T.rest,   run:'Rest'},
       {day:'Sat',tag:T.long,   run:'Long run — 9 miles (easy, stay conversational)'},
       {day:'Sun',tag:T.recover,run:'Optional recovery run — 3 miles easy'}
     ]},
     {week:4,theme:'Speed & Strength',days:[
       {day:'Mon',tag:T.yoga,   run:'Yoga — 60 min (full body flow)'},
-      {day:'Tue',tag:T.tempo,  run:'Tempo run — 6 miles (3 mi easy + 2 mi tempo + 1 mi easy)'},
+      {day:'Tue',tag:T.track,  run:'5-6 miles at track'},
       {day:'Wed',tag:T.xtrain, run:'Cross-train — Bike 40 min (steady effort)'},
-      {day:'Thu',tag:T.track,  run:'Track — 6 miles (1 mi warm-up + 1600m repeats x3 + cool-down)'},
+      {day:'Thu',tag:T.track,  run:'5-6 miles at track'},
       {day:'Fri',tag:T.rest,   run:'Rest'},
       {day:'Sat',tag:T.long,   run:'Long run — 10 miles (easy pace, bring fuel)'},
       {day:'Sun',tag:T.recover,run:'Optional recovery run — 3 miles easy'}
     ]},
     {week:5,theme:'Peak Week Begins',days:[
       {day:'Mon',tag:T.yoga,   run:'Yoga — 60 min (restorative + deep stretch)'},
-      {day:'Tue',tag:T.fartlek,run:'Fartlek run — 6 miles (2 min fast / 1 min easy x8)'},
+      {day:'Tue',tag:T.track,  run:'5-6 miles at track'},
       {day:'Wed',tag:T.xtrain, run:'Cross-train — Bike 45 min'},
-      {day:'Thu',tag:T.track,  run:'Track — 6 miles (1 mi warm-up + 5x1000m + cool-down)'},
+      {day:'Thu',tag:T.track,  run:'5-6 miles at track'},
       {day:'Fri',tag:T.rest,   run:'Rest'},
       {day:'Sat',tag:T.long,   run:'Long run — 11 miles (easy, fuel at mile 5-6)'},
       {day:'Sun',tag:T.recover,run:'Optional recovery run — 3 miles easy'}
     ]},
     {week:6,theme:'Race Simulation',days:[
       {day:'Mon',tag:T.yoga,   run:'Yoga — 60 min (focus: glutes + lower back)'},
-      {day:'Tue',tag:T.thresh, run:'Threshold run — 6 miles at goal half marathon effort'},
+      {day:'Tue',tag:T.track,  run:'5-6 miles at track'},
       {day:'Wed',tag:T.xtrain, run:'Cross-train — Bike 40 min (easy — legs recovery)'},
-      {day:'Thu',tag:T.track,  run:'Track — 5-6 miles (1 mi warm-up + 3x1 mile at race pace + cool-down)'},
+      {day:'Thu',tag:T.track,  run:'5-6 miles at track'},
       {day:'Fri',tag:T.rest,   run:'Rest — prioritize sleep tonight'},
-      {day:'Sat',tag:T.long,   run:'Long run — 11 miles (miles 8-10 at goal race pace)'},
+      {day:'Sat',tag:T.long,   run:'Long run — 9 miles (easy, conversational pace)'},
       {day:'Sun',tag:T.recover,run:'Optional recovery run — 3 miles very easy'}
     ]},
     {week:7,theme:'Begin Taper',days:[
       {day:'Mon',tag:T.yoga,   run:'Yoga — 45 min (gentle, restorative)'},
-      {day:'Tue',tag:T.tempo,  run:'Tempo run — 5 miles (keep effort, reduce volume)'},
+      {day:'Tue',tag:T.track,  run:'5-6 miles at track'},
       {day:'Wed',tag:T.xtrain, run:'Cross-train — Bike 30 min (easy spin, active recovery)'},
-      {day:'Thu',tag:T.track,  run:'Track — 5 miles (1 mi warm-up + 4x400m + cool-down, easy effort)'},
+      {day:'Thu',tag:T.track,  run:'5-6 miles at track'},
       {day:'Fri',tag:T.rest,   run:'Rest'},
-      {day:'Sat',tag:T.long,   run:'Long run — 8 miles (easy, no pressure)'},
+      {day:'Sat',tag:T.long,   run:'Long run — 7 miles (easy, no pressure)'},
       {day:'Sun',tag:T.recover,run:'Optional recovery run — 3 miles easy'}
     ]},
     {week:8,theme:'Race Week',days:[
