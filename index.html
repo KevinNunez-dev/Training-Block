@@ -47,173 +47,101 @@
       transition: var(--transition);
     }
 
-    /* ── PASSWORD GATE ── */
+    /* PASSWORD GATE */
     #gate {
       position: fixed; inset: 0;
       background: #1a1a2e;
       display: flex; align-items: center; justify-content: center;
-      z-index: 9999;
-      flex-direction: column;
-      gap: 0;
+      z-index: 9999; flex-direction: column;
     }
     #gate.hidden { display: none; }
     .gate-box {
       background: #16213e;
       border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 16px;
-      padding: 40px 36px;
-      width: 100%;
-      max-width: 360px;
-      text-align: center;
-      box-shadow: 0 24px 64px rgba(0,0,0,0.5);
+      border-radius: 16px; padding: 40px 36px;
+      width: 100%; max-width: 360px;
+      text-align: center; box-shadow: 0 24px 64px rgba(0,0,0,0.5);
     }
-    .gate-box .gate-title {
-      font-size: 1.05rem;
-      font-weight: 800;
-      color: #eaeaea;
-      margin-bottom: 4px;
-      letter-spacing: 0.3px;
-    }
-    .gate-box .gate-sub {
-      font-size: 0.8rem;
-      color: #a0a0b0;
-      margin-bottom: 28px;
-    }
-    .pin-display {
-      display: flex;
-      justify-content: center;
-      gap: 12px;
-      margin-bottom: 24px;
-    }
+    .gate-title { font-size: 1.05rem; font-weight: 800; color: #eaeaea; margin-bottom: 4px; }
+    .gate-sub   { font-size: 0.8rem; color: #a0a0b0; margin-bottom: 28px; }
+    .pin-display { display: flex; justify-content: center; gap: 12px; margin-bottom: 24px; }
     .pin-dot {
-      width: 14px; height: 14px;
-      border-radius: 50%;
-      border: 2px solid #a0a0b0;
-      background: transparent;
+      width: 14px; height: 14px; border-radius: 50%;
+      border: 2px solid #a0a0b0; background: transparent;
       transition: background 0.2s, border-color 0.2s;
     }
     .pin-dot.filled { background: var(--primary); border-color: var(--primary); }
     .pin-dot.error  { background: #ef4444; border-color: #ef4444; }
-    .numpad {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-    }
+    .numpad { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
     .numpad button {
-      background: #0f3460;
-      border: 1px solid rgba(255,255,255,0.07);
-      border-radius: 10px;
-      color: #eaeaea;
-      font-size: 1.2rem;
-      font-weight: 700;
-      padding: 16px 0;
-      cursor: pointer;
-      transition: background 0.15s, transform 0.1s;
+      background: #0f3460; border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 10px; color: #eaeaea;
+      font-size: 1.2rem; font-weight: 700; padding: 16px 0;
+      cursor: pointer; transition: background 0.15s, transform 0.1s;
       font-family: var(--font);
     }
     .numpad button:hover { background: #1a4080; }
     .numpad button:active { transform: scale(0.95); }
-    .numpad .btn-del {
-      background: transparent;
-      border-color: rgba(255,255,255,0.05);
-      font-size: 1rem;
-      color: #a0a0b0;
-    }
-    .numpad .btn-del:hover { color: #ef4444; border-color: #ef4444; }
-    .gate-msg {
-      margin-top: 14px;
-      font-size: 0.78rem;
-      color: #ef4444;
-      min-height: 18px;
-      font-weight: 600;
-    }
+    .btn-del { background: transparent !important; border-color: rgba(255,255,255,0.05) !important; font-size: 1rem !important; color: #a0a0b0 !important; }
+    .btn-del:hover { color: #ef4444 !important; border-color: #ef4444 !important; }
+    .gate-msg { margin-top: 14px; font-size: 0.78rem; color: #ef4444; min-height: 18px; font-weight: 600; }
 
-    /* ── TOPBAR ── */
+    /* TOPBAR */
     .topbar {
       display: flex; align-items: center; justify-content: space-between;
-      padding: 12px 24px;
-      background: var(--card2);
+      padding: 12px 24px; background: var(--card2);
       border-bottom: 1px solid var(--border);
       position: sticky; top: 0; z-index: 100;
     }
-    .topbar .logo {
-      font-weight: 800; font-size: 1rem;
-      color: var(--primary); letter-spacing: 0.5px;
-    }
+    .topbar .logo { font-weight: 800; font-size: 1rem; color: var(--primary); letter-spacing: 0.5px; }
     .topbar .logo span { color: var(--text); font-weight: 400; }
-
     .theme-toggle {
-      display: flex; align-items: center; gap: 8px;
-      cursor: pointer;
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      padding: 6px 14px;
-      font-size: 0.82rem; font-weight: 600;
-      color: var(--text);
-      transition: var(--transition);
-      user-select: none;
+      display: flex; align-items: center; gap: 8px; cursor: pointer;
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 999px; padding: 6px 14px;
+      font-size: 0.82rem; font-weight: 600; color: var(--text);
+      transition: var(--transition); user-select: none;
     }
     .theme-toggle:hover { border-color: var(--primary); }
     .toggle-track {
-      width: 36px; height: 20px;
-      background: var(--muted);
-      border-radius: 999px; position: relative;
-      transition: background 0.3s;
+      width: 36px; height: 20px; background: var(--muted);
+      border-radius: 999px; position: relative; transition: background 0.3s;
     }
     [data-theme="light"] .toggle-track { background: var(--primary); }
     .toggle-track .knob {
       width: 14px; height: 14px; background: #fff;
-      border-radius: 50%; position: absolute;
-      top: 3px; left: 3px; transition: left 0.3s;
+      border-radius: 50%; position: absolute; top: 3px; left: 3px; transition: left 0.3s;
     }
     [data-theme="light"] .toggle-track .knob { left: 19px; }
 
-    /* ── HERO ── */
+    /* HERO */
     header {
       background: var(--hero-grad);
-      padding: 60px 24px 48px;
-      text-align: center;
+      padding: 60px 24px 48px; text-align: center;
       position: relative; overflow: hidden;
     }
     header .badge {
-      display: inline-block;
-      background: var(--primary); color: #fff;
-      font-size: 0.72rem; font-weight: 700;
-      letter-spacing: 2px; text-transform: uppercase;
-      padding: 4px 14px; border-radius: 999px;
-      margin-bottom: 16px;
+      display: inline-block; background: var(--primary); color: #fff;
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; padding: 4px 14px; border-radius: 999px; margin-bottom: 16px;
     }
-    header h1 {
-      font-size: clamp(2rem, 5vw, 3.2rem);
-      font-weight: 800; line-height: 1.15; margin-bottom: 12px;
-    }
+    header h1 { font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 800; line-height: 1.15; margin-bottom: 12px; }
     header h1 span { color: var(--primary); }
     header p { color: var(--muted); font-size: 1.05rem; max-width: 560px; margin: 0 auto 28px; }
 
-    /* ── COUNTDOWN ── */
+    /* COUNTDOWN */
     .countdown-wrap {
-      background: var(--card);
-      border: 1px solid var(--border);
+      background: var(--card); border: 1px solid var(--border);
       border-radius: var(--radius);
       display: inline-flex; flex-direction: column; align-items: center;
       padding: 18px 28px; margin-bottom: 28px; gap: 8px;
     }
-    .countdown-label {
-      font-size: 0.72rem; font-weight: 700;
-      letter-spacing: 2px; text-transform: uppercase;
-      color: var(--primary);
-    }
-    .countdown-input-row {
-      display: flex; align-items: center; gap: 8px;
-      flex-wrap: wrap; justify-content: center;
-    }
+    .countdown-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--primary); }
+    .countdown-input-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; justify-content: center; }
     .countdown-input-row input[type="date"] {
-      background: var(--card2); border: 1px solid var(--border);
-      border-radius: 8px; color: var(--text);
-      font-size: 0.85rem; padding: 6px 10px;
-      font-family: var(--font); cursor: pointer; outline: none;
-      transition: var(--transition);
+      background: var(--card2); border: 1px solid var(--border); border-radius: 8px;
+      color: var(--text); font-size: 0.85rem; padding: 6px 10px;
+      font-family: var(--font); cursor: pointer; outline: none; transition: var(--transition);
     }
     .countdown-input-row input:focus { border-color: var(--primary); }
     .countdown-digits { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
@@ -228,60 +156,40 @@
     .stat strong { display: block; font-size: 1.8rem; font-weight: 800; color: var(--primary); }
     .stat span { font-size: 0.78rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
 
-    /* ── MAIN ── */
+    /* MAIN */
     main { max-width: 1100px; margin: 48px auto; padding: 0 20px; }
-
     .section-title {
       font-size: 1.4rem; font-weight: 700; margin-bottom: 20px;
       display: flex; align-items: center; gap: 10px;
     }
-    .section-title::after {
-      content: ''; flex: 1; height: 2px;
-      background: linear-gradient(to right, var(--primary), transparent);
-    }
+    .section-title::after { content: ''; flex: 1; height: 2px; background: linear-gradient(to right, var(--primary), transparent); }
 
-    /* ── CHECKLIST ── */
-    .checklist-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 14px; margin-bottom: 52px;
-    }
+    /* CHECKLIST */
+    .checklist-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin-bottom: 52px; }
     .check-item {
-      background: var(--card); border: 1px solid var(--border);
-      border-radius: var(--radius); padding: 14px 16px;
-      display: flex; align-items: center; gap: 12px;
+      background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 14px 16px; display: flex; align-items: center; gap: 12px;
       cursor: pointer; transition: border-color 0.2s, background 0.2s; user-select: none;
     }
     .check-item:hover { border-color: var(--primary); }
     .check-item.done { background: rgba(74,222,128,0.07); border-color: var(--check); }
     .check-item .box {
-      width: 22px; height: 22px; border: 2px solid var(--muted);
-      border-radius: 6px; flex-shrink: 0;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 0.9rem; transition: all 0.2s;
+      width: 22px; height: 22px; border: 2px solid var(--muted); border-radius: 6px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center; font-size: 0.9rem; transition: all 0.2s;
     }
     .check-item.done .box { background: var(--check); border-color: var(--check); color: #000; }
     .check-item label { font-size: 0.9rem; cursor: pointer; }
 
-    /* ── WEEK CARDS ── */
-    .weeks-grid {
-      display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 20px; margin-bottom: 52px;
-    }
+    /* WEEK CARDS */
+    .weeks-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; margin-bottom: 52px; }
     .week-card {
-      background: var(--card); border: 1px solid var(--border);
-      border-radius: var(--radius); overflow: hidden;
-      transition: transform 0.2s, box-shadow 0.2s;
+      background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+      overflow: hidden; transition: transform 0.2s, box-shadow 0.2s;
     }
     .week-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,0,0,0.2); }
-    .week-header {
-      background: var(--card2); padding: 14px 18px;
-      display: flex; align-items: center; justify-content: space-between;
-    }
+    .week-header { background: var(--card2); padding: 14px 18px; display: flex; align-items: center; justify-content: space-between; }
     .week-header h3 { font-size: 0.95rem; font-weight: 700; }
-    .week-header .phase {
-      font-size: 0.7rem; padding: 3px 10px; border-radius: 999px;
-      font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;
-    }
+    .week-header .phase { font-size: 0.7rem; padding: 3px 10px; border-radius: 999px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
     .phase-base  { background: rgba(96,165,250,0.2);  color: #3b82f6; }
     .phase-build { background: rgba(251,191,36,0.2);  color: #d97706; }
     .phase-peak  { background: rgba(232,93,4,0.2);    color: var(--primary); }
@@ -289,86 +197,68 @@
 
     .week-body { padding: 16px 18px; }
     .day-row {
-      display: flex; align-items: flex-start; gap: 10px;
-      padding: 7px 4px; border-bottom: 1px solid var(--border);
-      cursor: pointer; border-radius: 6px; transition: background 0.15s;
+      display: flex; align-items: flex-start; gap: 10px; padding: 7px 4px;
+      border-bottom: 1px solid var(--border); cursor: pointer; border-radius: 6px; transition: background 0.15s;
     }
     .day-row:last-child { border-bottom: none; }
     .day-row:hover { background: var(--row-hover); }
     .day-row.done-day .day-label { text-decoration: line-through; color: var(--muted); }
     .day-row .day-check {
-      width: 18px; height: 18px; flex-shrink: 0;
-      border: 2px solid var(--muted); border-radius: 4px; margin-top: 2px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 0.7rem; transition: all 0.2s;
+      width: 18px; height: 18px; flex-shrink: 0; border: 2px solid var(--muted);
+      border-radius: 4px; margin-top: 2px;
+      display: flex; align-items: center; justify-content: center; font-size: 0.7rem; transition: all 0.2s;
     }
     .day-row.done-day .day-check { background: var(--check); border-color: var(--check); color: #000; }
     .day-label { font-size: 0.82rem; line-height: 1.4; }
     .day-name { font-weight: 700; color: var(--primary); font-size: 0.75rem; display: block; }
+    /* workout type tag */
+    .day-type {
+      display: inline-block; font-size: 0.65rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.5px;
+      padding: 1px 7px; border-radius: 999px; margin-left: 6px; vertical-align: middle;
+    }
+    .type-yoga    { background: rgba(167,139,250,0.18); color: #a78bfa; }
+    .type-tempo   { background: rgba(251,191,36,0.18);  color: #f59e0b; }
+    .type-xtrain  { background: rgba(96,165,250,0.18);  color: #60a5fa; }
+    .type-track   { background: rgba(232,93,4,0.18);    color: var(--primary); }
+    .type-rest    { background: rgba(160,160,176,0.12); color: var(--muted); }
+    .type-long    { background: rgba(74,222,128,0.18);  color: #4ade80; }
+    .type-recover { background: rgba(244,114,182,0.18); color: #f472b6; }
 
-    .week-progress {
-      height: 4px; background: var(--progress-track);
-      border-radius: 999px; margin: 14px 0 0; overflow: hidden;
-    }
-    .week-progress-bar {
-      height: 100%;
-      background: linear-gradient(to right, var(--primary), var(--check));
-      border-radius: 999px; transition: width 0.4s;
-    }
+    .week-progress { height: 4px; background: var(--progress-track); border-radius: 999px; margin: 14px 0 0; overflow: hidden; }
+    .week-progress-bar { height: 100%; background: linear-gradient(to right, var(--primary), var(--check)); border-radius: 999px; transition: width 0.4s; }
 
-    /* ── TIPS ── */
-    .tips-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 16px; margin-bottom: 52px;
-    }
-    .tip-card {
-      background: var(--card); border: 1px solid var(--border);
-      border-radius: var(--radius); padding: 20px;
-    }
+    /* TIPS */
+    .tips-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-bottom: 52px; }
+    .tip-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 20px; }
     .tip-card .tip-icon { font-size: 1.1rem; font-weight: 700; color: var(--primary); margin-bottom: 8px; }
     .tip-card h4 { font-size: 0.95rem; margin-bottom: 6px; }
     .tip-card p { font-size: 0.82rem; color: var(--muted); line-height: 1.55; }
 
-    /* ── PROGRESS SUMMARY ── */
+    /* PROGRESS SUMMARY */
     .summary-bar {
-      background: var(--card); border: 1px solid var(--border);
-      border-radius: var(--radius); padding: 20px 24px;
-      display: flex; align-items: center; gap: 20px;
-      flex-wrap: wrap; margin-bottom: 40px;
+      background: var(--card); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 20px 24px; display: flex; align-items: center; gap: 20px; flex-wrap: wrap; margin-bottom: 40px;
     }
     .summary-bar .overall-label { font-size: 0.85rem; color: var(--muted); min-width: 120px; }
-    .summary-bar .overall-bar {
-      flex: 1; min-width: 160px; height: 10px;
-      background: var(--progress-track); border-radius: 999px; overflow: hidden;
-    }
-    .summary-bar .overall-fill {
-      height: 100%;
-      background: linear-gradient(to right, var(--primary), var(--check));
-      border-radius: 999px; transition: width 0.4s;
-    }
+    .summary-bar .overall-bar { flex: 1; min-width: 160px; height: 10px; background: var(--progress-track); border-radius: 999px; overflow: hidden; }
+    .summary-bar .overall-fill { height: 100%; background: linear-gradient(to right, var(--primary), var(--check)); border-radius: 999px; transition: width 0.4s; }
     #overall-pct { font-weight: 700; font-size: 1rem; color: var(--primary); min-width: 42px; text-align: right; }
 
-    /* ── FOOTER ── */
-    footer {
-      text-align: center; padding: 32px 20px;
-      color: var(--muted); font-size: 0.8rem;
-      border-top: 1px solid var(--border);
-    }
+    /* FOOTER */
+    footer { text-align: center; padding: 32px 20px; color: var(--muted); font-size: 0.8rem; border-top: 1px solid var(--border); }
 
-    /* ── MOBILE NAV ── */
+    /* MOBILE NAV */
     .mobile-nav {
-      display: none;
-      position: fixed; bottom: 0; left: 0; right: 0;
+      display: none; position: fixed; bottom: 0; left: 0; right: 0;
       background: var(--card2); border-top: 1px solid var(--border);
-      padding: 10px 0 calc(10px + env(safe-area-inset-bottom));
-      z-index: 200;
+      padding: 10px 0 calc(10px + env(safe-area-inset-bottom)); z-index: 200;
     }
     .mobile-nav ul { display: flex; list-style: none; justify-content: space-around; align-items: center; }
     .mobile-nav a {
-      display: flex; flex-direction: column; align-items: center;
-      gap: 3px; text-decoration: none; color: var(--muted);
-      font-size: 0.65rem; font-weight: 600;
-      text-transform: uppercase; letter-spacing: 0.5px; transition: color 0.2s;
+      display: flex; flex-direction: column; align-items: center; gap: 3px;
+      text-decoration: none; color: var(--muted); font-size: 0.65rem;
+      font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; transition: color 0.2s;
     }
     .mobile-nav a:hover, .mobile-nav a.active { color: var(--primary); }
 
@@ -423,8 +313,7 @@
 <header>
   <div class="badge">8 Week Training Block</div>
   <h1>Thalia's <span>Half Marathon</span><br>Training Plan</h1>
-  <p>13.1 miles. 8 weeks. One finish line. Set your race date and check off every run as you go.</p>
-
+  <p>13.1 miles. 8 weeks. One finish line. Set your race date and check off every workout as you go.</p>
   <div class="countdown-wrap">
     <div class="countdown-label">Race Day Countdown</div>
     <div class="countdown-input-row">
@@ -442,18 +331,16 @@
     </div>
     <div id="cd-msg"></div>
   </div>
-
   <div class="stats-row">
     <div class="stat"><strong>8</strong><span>Weeks</span></div>
     <div class="stat"><strong>13.1</strong><span>Miles</span></div>
     <div class="stat"><strong>4</strong><span>Phases</span></div>
-    <div class="stat"><strong>~32</strong><span>Workouts</span></div>
+    <div class="stat"><strong>~40</strong><span>Workouts</span></div>
   </div>
 </header>
 
 <!-- MAIN -->
 <main>
-
   <div class="summary-bar">
     <span class="overall-label">Overall Progress</span>
     <div class="overall-bar"><div class="overall-fill" id="overall-fill" style="width:0%"></div></div>
@@ -468,14 +355,13 @@
 
   <h2 class="section-title" id="tips">Runner's Tips</h2>
   <div class="tips-grid">
-    <div class="tip-card"><div class="tip-icon">Hydration</div><h4>Stay Hydrated</h4><p>Drink 16-20 oz of water 2 hrs before every run. Carry water or use stations on runs over 6 miles.</p></div>
-    <div class="tip-card"><div class="tip-icon">Fuel</div><h4>Fuel &amp; Nutrition</h4><p>Eat a light carb snack 45-60 min pre-run. Use energy gels or chews on runs longer than 60 minutes.</p></div>
-    <div class="tip-card"><div class="tip-icon">Recovery</div><h4>Sleep &amp; Recovery</h4><p>Aim for 7-9 hrs of sleep. Schedule rest days seriously — they build fitness just as runs do.</p></div>
-    <div class="tip-card"><div class="tip-icon">Gear</div><h4>Gear Check</h4><p>Rotate shoes every 300-500 miles. Moisture-wicking socks prevent blisters on long runs.</p></div>
-    <div class="tip-card"><div class="tip-icon">Pace</div><h4>Easy Pace Rule</h4><p>80% of your runs should feel conversational. Save speed work for designated tempo days only.</p></div>
-    <div class="tip-card"><div class="tip-icon">Warm-Up</div><h4>Warm-Up &amp; Cool-Down</h4><p>5-min brisk walk before every run. 5-min walk + 10-min stretch after every run to reduce soreness.</p></div>
+    <div class="tip-card"><div class="tip-icon">Hydration</div><h4>Stay Hydrated</h4><p>Drink 16-20 oz of water 2 hrs before every run. Carry water or use a belt on runs over 6 miles.</p></div>
+    <div class="tip-card"><div class="tip-icon">Fuel</div><h4>Fuel &amp; Nutrition</h4><p>Light carb snack 45-60 min before runs. Use energy gels on long runs over 60 minutes.</p></div>
+    <div class="tip-card"><div class="tip-icon">Recovery</div><h4>Sleep &amp; Recovery</h4><p>Aim for 7-9 hrs of sleep. Sunday recovery runs should be truly easy — no ego pace.</p></div>
+    <div class="tip-card"><div class="tip-icon">Yoga</div><h4>Monday Yoga</h4><p>Monday yoga is your reset. Focus on hip flexors, hamstrings, and calves — the runner's trifecta.</p></div>
+    <div class="tip-card"><div class="tip-icon">Track</div><h4>Thursday Track</h4><p>Track days build speed and form. Warm up 1 mile easy before any interval or threshold effort.</p></div>
+    <div class="tip-card"><div class="tip-icon">Long Run</div><h4>Saturday Long Run</h4><p>Run Saturdays at a conversational pace — 60-90 sec/mile slower than your goal race pace.</p></div>
   </div>
-
 </main>
 
 <footer>
@@ -492,194 +378,180 @@
 </nav>
 
 <script>
-  // ── PASSWORD GATE ─────────────────────────────────────────────
+  // PASSWORD GATE
   const CORRECT_PIN = '0719';
   let currentPin = '';
-
-  if (sessionStorage.getItem('hm-auth') === '1') {
-    document.getElementById('gate').classList.add('hidden');
-  }
-
-  function pinPress(digit) {
+  if (sessionStorage.getItem('hm-auth') === '1') document.getElementById('gate').classList.add('hidden');
+  function pinPress(d) {
     if (currentPin.length >= 4) return;
-    currentPin += digit;
-    updateDots();
+    currentPin += d; updateDots();
     if (currentPin.length === 4) checkPin();
   }
-
-  function pinDel() {
-    currentPin = currentPin.slice(0, -1);
-    updateDots();
-    document.getElementById('gate-msg').textContent = '';
-  }
-
+  function pinDel() { currentPin = currentPin.slice(0,-1); updateDots(); document.getElementById('gate-msg').textContent=''; }
   function updateDots() {
-    for (let i = 0; i < 4; i++) {
-      const dot = document.getElementById('d' + i);
-      dot.classList.toggle('filled', i < currentPin.length);
-      dot.classList.remove('error');
-    }
+    for (let i=0;i<4;i++) { const dot=document.getElementById('d'+i); dot.classList.toggle('filled',i<currentPin.length); dot.classList.remove('error'); }
   }
-
   function checkPin() {
-    if (currentPin === CORRECT_PIN) {
-      sessionStorage.setItem('hm-auth', '1');
-      document.getElementById('gate').classList.add('hidden');
-    } else {
-      for (let i = 0; i < 4; i++) document.getElementById('d' + i).classList.add('error');
-      document.getElementById('gate-msg').textContent = 'Incorrect PIN. Try again.';
-      setTimeout(() => { currentPin = ''; updateDots(); document.getElementById('gate-msg').textContent = ''; }, 1200);
+    if (currentPin===CORRECT_PIN) { sessionStorage.setItem('hm-auth','1'); document.getElementById('gate').classList.add('hidden'); }
+    else {
+      for(let i=0;i<4;i++) document.getElementById('d'+i).classList.add('error');
+      document.getElementById('gate-msg').textContent='Incorrect PIN. Try again.';
+      setTimeout(()=>{ currentPin=''; updateDots(); document.getElementById('gate-msg').textContent=''; },1200);
     }
   }
-
-  document.addEventListener('keydown', (e) => {
-    if (document.getElementById('gate').classList.contains('hidden')) return;
-    if (e.key >= '0' && e.key <= '9') pinPress(e.key);
-    if (e.key === 'Backspace') pinDel();
+  document.addEventListener('keydown',(e)=>{
+    if(document.getElementById('gate').classList.contains('hidden')) return;
+    if(e.key>='0'&&e.key<='9') pinPress(e.key);
+    if(e.key==='Backspace') pinDel();
   });
 
-  // ── THEME TOGGLE ──────────────────────────────────────────────
+  // THEME TOGGLE
   const html = document.documentElement;
   const themeBtn = document.getElementById('theme-btn');
   const themeIcon = document.getElementById('theme-icon');
-
   const savedTheme = localStorage.getItem('hm-theme') || 'dark';
   html.setAttribute('data-theme', savedTheme);
-  themeIcon.textContent = savedTheme === 'dark' ? 'Dark' : 'Light';
-
+  themeIcon.textContent = savedTheme==='dark' ? 'Dark' : 'Light';
   themeBtn.addEventListener('click', () => {
-    const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    const next = html.getAttribute('data-theme')==='dark' ? 'light' : 'dark';
     html.setAttribute('data-theme', next);
     localStorage.setItem('hm-theme', next);
-    themeIcon.textContent = next === 'dark' ? 'Dark' : 'Light';
+    themeIcon.textContent = next==='dark' ? 'Dark' : 'Light';
   });
 
-  // ── COUNTDOWN ─────────────────────────────────────────────────
+  // COUNTDOWN
   const raceDateInput = document.getElementById('race-date');
   let cdInterval = null;
   const savedDate = localStorage.getItem('hm-race-date');
   if (savedDate) { raceDateInput.value = savedDate; startCountdown(); }
-  raceDateInput.addEventListener('change', () => {
-    localStorage.setItem('hm-race-date', raceDateInput.value);
-    startCountdown();
-  });
-  function startCountdown() {
-    if (cdInterval) clearInterval(cdInterval);
-    tick(); cdInterval = setInterval(tick, 1000);
-  }
+  raceDateInput.addEventListener('change', () => { localStorage.setItem('hm-race-date', raceDateInput.value); startCountdown(); });
+  function startCountdown() { if(cdInterval) clearInterval(cdInterval); tick(); cdInterval=setInterval(tick,1000); }
   function tick() {
-    const raceDate = new Date(raceDateInput.value + 'T07:00:00');
-    const now = new Date();
-    const diff = raceDate - now;
+    const raceDate = new Date(raceDateInput.value+'T07:00:00');
+    const now = new Date(); const diff = raceDate-now;
     const msg = document.getElementById('cd-msg');
-    if (isNaN(raceDate.getTime())) { msg.textContent = 'Pick your race date above'; return; }
-    if (diff <= 0) {
-      ['cd-days','cd-hours','cd-mins','cd-secs'].forEach(id => document.getElementById(id).textContent = '00');
-      msg.textContent = diff > -86400000 ? 'Race Day! Go crush it!' : 'Race complete — great job!';
+    if(isNaN(raceDate.getTime())) { msg.textContent='Pick your race date above'; return; }
+    if(diff<=0) {
+      ['cd-days','cd-hours','cd-mins','cd-secs'].forEach(id=>document.getElementById(id).textContent='00');
+      msg.textContent = diff>-86400000 ? 'Race Day! Go crush it!' : 'Race complete — great job!';
       return;
     }
-    const d = Math.floor(diff / 86400000);
-    const h = Math.floor((diff % 86400000) / 3600000);
-    const m = Math.floor((diff % 3600000) / 60000);
-    const s = Math.floor((diff % 60000) / 1000);
+    const d=Math.floor(diff/86400000), h=Math.floor((diff%86400000)/3600000),
+          m=Math.floor((diff%3600000)/60000), s=Math.floor((diff%60000)/1000);
     document.getElementById('cd-days').textContent  = String(d).padStart(2,'0');
     document.getElementById('cd-hours').textContent = String(h).padStart(2,'0');
     document.getElementById('cd-mins').textContent  = String(m).padStart(2,'0');
     document.getElementById('cd-secs').textContent  = String(s).padStart(2,'0');
-    msg.textContent = d + ' day' + (d !== 1 ? 's' : '') + ' until race day — stay the course!';
+    msg.textContent = d+' day'+(d!==1?'s':'')+' until race day — stay the course!';
   }
 
-  // ── TRAINING DATA ─────────────────────────────────────────────
+  // TRAINING DATA
   const preItems = [
     'Running shoes (proper fit)', 'Moisture-wicking socks', 'GPS watch or phone tracker',
     'Water bottle / hydration vest', 'Energy gels / chews', 'Sunscreen applied',
-    'Weather check done', 'Warm-up complete', 'Route planned', 'Emergency ID / phone',
-    'Headphones charged', 'Rest day logged last week'
+    'Weather check done', 'Yoga mat (Monday)', 'Route planned', 'Emergency ID / phone',
+    'Headphones charged', 'Bike ready (Wednesday cross-train)'
   ];
 
   const phases = { 1:'Base',2:'Base',3:'Build',4:'Build',5:'Peak',6:'Peak',7:'Taper',8:'Taper' };
   const phaseClass = { 'Base':'phase-base','Build':'phase-build','Peak':'phase-peak','Taper':'phase-taper' };
 
+  // Workout type tags
+  const T = {
+    yoga:    '<span class="day-type type-yoga">Yoga</span>',
+    tempo:   '<span class="day-type type-tempo">Tempo</span>',
+    fartlek: '<span class="day-type type-tempo">Fartlek</span>',
+    thresh:  '<span class="day-type type-tempo">Threshold</span>',
+    xtrain:  '<span class="day-type type-xtrain">Cross-Train</span>',
+    track:   '<span class="day-type type-track">Track</span>',
+    rest:    '<span class="day-type type-rest">Rest</span>',
+    long:    '<span class="day-type type-long">Long Run</span>',
+    recover: '<span class="day-type type-recover">Recovery</span>',
+    race:    '<span class="day-type type-long">Race Day</span>',
+  };
+
+  // Structure: Mon=Yoga, Tue=Tempo/Fartlek/Threshold, Wed=Bike, Thu=Track, Fri=Rest, Sat=Long, Sun=Optional recovery
+  // Long run baseline: Week 1 = 7 mi (where she is now), build ~1 mi/wk to 11, then taper
   const weeks = [
-    { week:1, theme:'Find Your Legs', days:[
-      {day:'Mon',run:'Rest / Light stretching'},
-      {day:'Tue',run:'Easy run — 3 miles'},
-      {day:'Wed',run:'Cross-train 30 min (bike/swim)'},
-      {day:'Thu',run:'Easy run — 3 miles'},
-      {day:'Fri',run:'Rest'},
-      {day:'Sat',run:'Long run — 4 miles (easy pace)'},
-      {day:'Sun',run:'Walk / Active recovery 20 min'}
+    { week:1, theme:'Find Your Groove', days:[
+      {day:'Mon', tag:T.yoga,    run:'Yoga — 60 min (hip flexors, hamstrings, calves)'},
+      {day:'Tue', tag:T.tempo,   run:'Tempo run — 5 miles at comfortably hard pace'},
+      {day:'Wed', tag:T.xtrain,  run:'Cross-train — Bike 30-40 min (moderate effort)'},
+      {day:'Thu', tag:T.track,   run:'Track — 5 miles (easy + 4x800m strides)'},
+      {day:'Fri', tag:T.rest,    run:'Rest — light stretching or foam roll'},
+      {day:'Sat', tag:T.long,    run:'Long run — 7 miles (easy, conversational pace)'},
+      {day:'Sun', tag:T.recover, run:'Optional recovery run — 3 miles easy'}
     ]},
-    { week:2, theme:'Build the Base', days:[
-      {day:'Mon',run:'Rest'},
-      {day:'Tue',run:'Easy run — 3.5 miles'},
-      {day:'Wed',run:'Cross-train 35 min'},
-      {day:'Thu',run:'Easy run — 4 miles'},
-      {day:'Fri',run:'Rest'},
-      {day:'Sat',run:'Long run — 5 miles'},
-      {day:'Sun',run:'Active recovery 20 min'}
+    { week:2, theme:'Build Consistency', days:[
+      {day:'Mon', tag:T.yoga,    run:'Yoga — 60 min (focus: hip openers + back)'},
+      {day:'Tue', tag:T.fartlek, run:'Fartlek run — 5 miles (1 min fast / 2 min easy x8)'},
+      {day:'Wed', tag:T.xtrain,  run:'Cross-train — Bike 35-40 min'},
+      {day:'Thu', tag:T.track,   run:'Track — 5 miles (2 mi warm-up + 6x400m + cool-down)'},
+      {day:'Fri', tag:T.rest,    run:'Rest'},
+      {day:'Sat', tag:T.long,    run:'Long run — 8 miles (easy pace)'},
+      {day:'Sun', tag:T.recover, run:'Optional recovery run — 3 miles easy'}
     ]},
-    { week:3, theme:'Increase Volume', days:[
-      {day:'Mon',run:'Rest'},
-      {day:'Tue',run:'Easy run — 4 miles'},
-      {day:'Wed',run:'Tempo run — 3 miles (comfortably hard)'},
-      {day:'Thu',run:'Easy run — 4 miles'},
-      {day:'Fri',run:'Rest'},
-      {day:'Sat',run:'Long run — 6 miles'},
-      {day:'Sun',run:'Yoga / foam roll 30 min'}
+    { week:3, theme:'Increase the Load', days:[
+      {day:'Mon', tag:T.yoga,    run:'Yoga — 60 min (focus: quads + IT band)'},
+      {day:'Tue', tag:T.thresh,  run:'Threshold run — 6 miles (2 mi easy + 3 mi at threshold + 1 mi cool)'},
+      {day:'Wed', tag:T.xtrain,  run:'Cross-train — Bike 40 min (add 1-2 hill segments)'},
+      {day:'Thu', tag:T.track,   run:'Track — 6 miles (1 mi warm-up + 8x400m + cool-down)'},
+      {day:'Fri', tag:T.rest,    run:'Rest'},
+      {day:'Sat', tag:T.long,    run:'Long run — 9 miles (easy, stay conversational)'},
+      {day:'Sun', tag:T.recover, run:'Optional recovery run — 3 miles easy'}
     ]},
-    { week:4, theme:'First Speed Work', days:[
-      {day:'Mon',run:'Rest'},
-      {day:'Tue',run:'Easy run — 4 miles'},
-      {day:'Wed',run:'Intervals — 6x400m at 5K pace'},
-      {day:'Thu',run:'Easy run — 4 miles'},
-      {day:'Fri',run:'Rest'},
-      {day:'Sat',run:'Long run — 7 miles'},
-      {day:'Sun',run:'Cross-train 30 min'}
+    { week:4, theme:'Speed & Strength', days:[
+      {day:'Mon', tag:T.yoga,    run:'Yoga — 60 min (full body flow)'},
+      {day:'Tue', tag:T.tempo,   run:'Tempo run — 6 miles (3 mi easy + 2 mi tempo + 1 mi easy)'},
+      {day:'Wed', tag:T.xtrain,  run:'Cross-train — Bike 40 min (steady effort)'},
+      {day:'Thu', tag:T.track,   run:'Track — 6 miles (1 mi warm-up + 1600m repeats x3 + cool-down)'},
+      {day:'Fri', tag:T.rest,    run:'Rest'},
+      {day:'Sat', tag:T.long,    run:'Long run — 10 miles (easy pace, bring fuel)'},
+      {day:'Sun', tag:T.recover, run:'Optional recovery run — 3 miles easy'}
     ]},
-    { week:5, theme:'Hit Your Peak', days:[
-      {day:'Mon',run:'Rest'},
-      {day:'Tue',run:'Easy run — 5 miles'},
-      {day:'Wed',run:'Tempo run — 4 miles'},
-      {day:'Thu',run:'Easy run — 5 miles'},
-      {day:'Fri',run:'Rest'},
-      {day:'Sat',run:'Long run — 9 miles'},
-      {day:'Sun',run:'Active recovery / walk'}
+    { week:5, theme:'Peak Week Begins', days:[
+      {day:'Mon', tag:T.yoga,    run:'Yoga — 60 min (restorative + deep stretch)'},
+      {day:'Tue', tag:T.fartlek, run:'Fartlek run — 6 miles (2 min fast / 1 min easy x8)'},
+      {day:'Wed', tag:T.xtrain,  run:'Cross-train — Bike 45 min'},
+      {day:'Thu', tag:T.track,   run:'Track — 6 miles (1 mi warm-up + 5x1000m + cool-down)'},
+      {day:'Fri', tag:T.rest,    run:'Rest'},
+      {day:'Sat', tag:T.long,    run:'Long run — 11 miles (easy, fuel at mile 5-6)'},
+      {day:'Sun', tag:T.recover, run:'Optional recovery run — 3 miles easy'}
     ]},
     { week:6, theme:'Race Simulation', days:[
-      {day:'Mon',run:'Rest'},
-      {day:'Tue',run:'Easy run — 5 miles'},
-      {day:'Wed',run:'Intervals — 8x400m at 5K pace'},
-      {day:'Thu',run:'Easy run — 4 miles'},
-      {day:'Fri',run:'Rest'},
-      {day:'Sat',run:'Long run — 11 miles (race gear)'},
-      {day:'Sun',run:'Rest + stretch 20 min'}
+      {day:'Mon', tag:T.yoga,    run:'Yoga — 60 min (focus: glutes + lower back)'},
+      {day:'Tue', tag:T.thresh,  run:'Threshold run — 6 miles at goal half marathon effort'},
+      {day:'Wed', tag:T.xtrain,  run:'Cross-train — Bike 40 min (easy — legs recovery)'},
+      {day:'Thu', tag:T.track,   run:'Track — 5-6 miles (1 mi warm-up + 3x1 mile at race pace + cool-down)'},
+      {day:'Fri', tag:T.rest,    run:'Rest — prioritize sleep tonight'},
+      {day:'Sat', tag:T.long,    run:'Long run — 11 miles (miles 8-10 at goal race pace)'},
+      {day:'Sun', tag:T.recover, run:'Optional recovery run — 3 miles very easy'}
     ]},
     { week:7, theme:'Begin Taper', days:[
-      {day:'Mon',run:'Rest'},
-      {day:'Tue',run:'Easy run — 4 miles'},
-      {day:'Wed',run:'Tempo run — 3 miles'},
-      {day:'Thu',run:'Easy run — 3 miles'},
-      {day:'Fri',run:'Rest'},
-      {day:'Sat',run:'Long run — 8 miles (easy)'},
-      {day:'Sun',run:'Foam roll + light yoga'}
+      {day:'Mon', tag:T.yoga,    run:'Yoga — 45 min (gentle, restorative)'},
+      {day:'Tue', tag:T.tempo,   run:'Tempo run — 5 miles (keep effort, reduce volume)'},
+      {day:'Wed', tag:T.xtrain,  run:'Cross-train — Bike 30 min (easy spin, active recovery)'},
+      {day:'Thu', tag:T.track,   run:'Track — 5 miles (1 mi warm-up + 4x400m + cool-down, easy effort)'},
+      {day:'Fri', tag:T.rest,    run:'Rest'},
+      {day:'Sat', tag:T.long,    run:'Long run — 8 miles (easy, no pressure)'},
+      {day:'Sun', tag:T.recover, run:'Optional recovery run — 3 miles easy'}
     ]},
     { week:8, theme:'Race Week', days:[
-      {day:'Mon',run:'Rest'},
-      {day:'Tue',run:'Easy run — 3 miles'},
-      {day:'Wed',run:'Easy run — 2 miles + strides'},
-      {day:'Thu',run:'Rest'},
-      {day:'Fri',run:'Easy 20-min shakeout run'},
-      {day:'Sat',run:'Rest — prep gear, hydrate well'},
-      {day:'Sun',run:'RACE DAY — 13.1 miles!'}
+      {day:'Mon', tag:T.yoga,    run:'Yoga — 30 min (light, no deep stretching)'},
+      {day:'Tue', tag:T.tempo,   run:'Easy run — 3 miles with 4 x 20-sec strides at end'},
+      {day:'Wed', tag:T.xtrain,  run:'Cross-train — Bike 20 min (very easy spin only)'},
+      {day:'Thu', tag:T.track,   run:'Shakeout — 2 miles easy + 4x100m strides (no track workout)'},
+      {day:'Fri', tag:T.rest,    run:'Rest — prep gear, lay out race kit, hydrate'},
+      {day:'Sat', tag:T.rest,    run:'Rest — light walk, early dinner, early to bed'},
+      {day:'Sun', tag:T.race,    run:'RACE DAY — 13.1 miles. Trust your training!'}
     ]}
   ];
 
-  // ── STATE ─────────────────────────────────────────────────────
+  // STATE
   const state = JSON.parse(localStorage.getItem('hm-training') || '{}');
   function save() { localStorage.setItem('hm-training', JSON.stringify(state)); }
 
-  // ── PRE-RUN CHECKLIST ─────────────────────────────────────────
+  // PRE-RUN CHECKLIST
   const preGrid = document.getElementById('pre-checklist');
   preItems.forEach((label, i) => {
     const key = 'pre-' + i;
@@ -695,7 +567,7 @@
     preGrid.appendChild(el);
   });
 
-  // ── WEEK CARDS ────────────────────────────────────────────────
+  // WEEK CARDS
   const weeksGrid = document.getElementById('weeks-grid');
   weeks.forEach(w => {
     const card = document.createElement('div');
@@ -707,10 +579,10 @@
       const done = state[key] ? ' done-day' : '';
       return `<div class="day-row${done}" data-key="${key}">
         <div class="day-check">${state[key] ? '&#10003;' : ''}</div>
-        <span class="day-label"><span class="day-name">${d.day}</span>${d.run}</span>
+        <span class="day-label"><span class="day-name">${d.day}${d.tag}</span>${d.run}</span>
       </div>`;
     }).join('');
-    const filled = w.days.filter((_, di) => state[`w${w.week}-d${di}`]).length;
+    const filled = w.days.filter((_,di) => state[`w${w.week}-d${di}`]).length;
     const pct = Math.round((filled / w.days.length) * 100);
     card.innerHTML = `
       <div class="week-header">
@@ -730,7 +602,7 @@
         save();
         const wNum = parseInt(key.split('-')[0].slice(1));
         const wData = weeks.find(x => x.week === wNum);
-        const f = wData.days.filter((_, di) => state[`w${wNum}-d${di}`]).length;
+        const f = wData.days.filter((_,di) => state[`w${wNum}-d${di}`]).length;
         card.querySelector('.week-progress-bar').style.width = Math.round((f / wData.days.length) * 100) + '%';
         updateOverall();
       });
@@ -738,11 +610,11 @@
     weeksGrid.appendChild(card);
   });
 
-  // ── OVERALL PROGRESS ──────────────────────────────────────────
+  // OVERALL PROGRESS
   function updateOverall() {
-    const total = weeks.reduce((s, w) => s + w.days.length, 0) + preItems.length;
-    const done  = weeks.reduce((s, w) => s + w.days.filter((_, di) => state[`w${w.week}-d${di}`]).length, 0)
-                + preItems.filter((_, i) => state['pre-' + i]).length;
+    const total = weeks.reduce((s,w) => s + w.days.length, 0) + preItems.length;
+    const done  = weeks.reduce((s,w) => s + w.days.filter((_,di) => state[`w${w.week}-d${di}`]).length, 0)
+                + preItems.filter((_,i) => state['pre-'+i]).length;
     const pct = Math.round((done / total) * 100);
     document.getElementById('overall-fill').style.width = pct + '%';
     document.getElementById('overall-pct').textContent  = pct + '%';
